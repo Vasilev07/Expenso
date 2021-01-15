@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpensoAPI", "ExpensoAPI\ExpensoAPI.csproj", "{EC11BA59-7C21-4421-9CD7-C874D80AD616}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC11BA59-7C21-4421-9CD7-C874D80AD616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC11BA59-7C21-4421-9CD7-C874D80AD616}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC11BA59-7C21-4421-9CD7-C874D80AD616}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC11BA59-7C21-4421-9CD7-C874D80AD616}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ECEED5AF-F875-48B4-8D4D-98A5E8AA286D}
+	EndGlobalSection
+EndGlobal

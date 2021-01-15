@@ -1,0 +1,25 @@
+<div class="expenses-container">
+    <mat-form-field appearance="fill">
+        <input matInput [matDatepicker]="dp" [formControl]="date"/>
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp
+                        startView="multi-year"
+                        (yearSelected)="chosenYearHandler($event)"
+                        (monthSelected)="chosenMonthHandler($event, dp)"
+                        panelClass="example-month-picker">
+        </mat-datepicker>
+    </mat-form-field>
+    <div>Expenses</div>
+</div>
+<button mat-button (click)="onAdd()">
+    <mat-icon>add</mat-icon>
+    Add
+</button>
+<div class="expenses" *ngFor="let expense of expenses">
+    <mat-card>
+        <mat-icon>home</mat-icon>
+        {{ expense.name }}
+        {{ expense.category.name }}
+        {{ expense.amount }}
+    </mat-card>
+</div>
