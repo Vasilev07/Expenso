@@ -21,9 +21,6 @@ interface Expense {
   templateUrl: './expenses.component.html',
   styleUrls: ['./expenses.component.scss'],
   providers: [
-    // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
-    // application's root module. We provide it at the component level here, due to limitations of
-    // our example generation script.
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
@@ -42,11 +39,15 @@ export class ExpensesComponent implements OnInit {
               public dialog: MatDialog) {
   }
 
+  public getAllExpenses(): void {
+    this.http.get('https://localhost:44314/api/Expenses').subscribe(expenses => {
+      console.log(expenses);
+      this.expenses = expenses as any;
+    });
+  }
+
   public ngOnInit(): void {
-      this.http.get('https://localhost:44314/api/Expenses').subscribe(expenses => {
-        console.log(expenses);
-        this.expenses = expenses as any;
-      });
+      this.getAllExpenses();
 
       this.http.get('https://localhost:44314/api/Category').subscribe((categories) => {
         this.categories = categories as any;
@@ -68,12 +69,25 @@ export class ExpensesComponent implements OnInit {
 
   public onAdd(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '250px',
-      data: { name: '', category: this.categories, amount: '' }
+      width: '300px',
+      data: { date: '', category: this.categories, amount: '' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      this.http.post('https://localhost:44314/api/Expenses', result).subscribe(() => {
+        this.getAllExpenses();
+      });
     });
+  }
+
+  public onEdit(expense: any): void {
+  console.log();
+  const dialogRef = this.dialog.open(DialogComponent, {
+        width: '300px',
+        data: { date: expense.createdAt, category: this.categories, amount: '' }
+      });
+  }
+
+  public onDelete(): void {
   }
 }
