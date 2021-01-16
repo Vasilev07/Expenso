@@ -22,7 +22,7 @@
 <div class="expenses" *ngFor="let expense of expenses">
     <mat-card>
       <div class="expense-details">
-        <mat-icon>home</mat-icon>
+        <mat-icon>{{ getIconName(expense.category.name) }}</mat-icon>
         {{ expense.name }}
         {{ expense.category.name }}
         {{ expense.amount }}

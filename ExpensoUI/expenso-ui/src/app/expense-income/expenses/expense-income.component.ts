@@ -10,6 +10,8 @@ import { isEqual } from 'lodash';
 import * as moment from 'moment';
 import { Moment } from 'moment';
 import { MY_FORMATS } from 'src/app/common/formats';
+import { icons } from 'src/app/common/icons';
+import { ICategory } from 'src/app/common/types/category.interface';
 import { IExpenseIncomeData } from 'src/app/common/types/expense-income-data.interface';
 import { ConfirmationDialogComponent } from 'src/app/core/confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
 import { ExpenseIncomeDialogComponent } from 'src/app/core/expense-income-dialog/expense-income-dialog.component';
@@ -46,12 +48,18 @@ export class ExpenseIncomeComponent implements OnInit {
     });
   }
 
+  public getAllCategoriesByType(): void {
+    this.http.get('https://localhost:44314/api/Category').subscribe((categories: any) => {
+      this.categories = categories.filter((cat: any) => cat.isExpense === this.isExpense);
+      console.log(categories);
+      console.log(this.categories);
+    });
+  }
+
   public ngOnInit(): void {
       this.getAllExpenses();
 
-      this.http.get('https://localhost:44314/api/Category').subscribe((categories) => {
-        this.categories = categories as any;
-      });
+      this.getAllCategoriesByType();
   }
 
   public chosenYearHandler(normalizedYear: Moment): void {
@@ -123,6 +131,10 @@ export class ExpenseIncomeComponent implements OnInit {
   public onToggleChange(change: MatSlideToggleChange): void {
     this.isExpense = !change.checked;
     this.getAllExpenses();
+    this.getAllCategoriesByType();
+  }
 
+  public getIconName(name: string): string {
+    return icons[name] as any;
   }
 }
