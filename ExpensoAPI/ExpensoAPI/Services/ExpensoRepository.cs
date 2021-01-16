@@ -90,5 +90,13 @@ namespace ExpensoAPI.Services
             _context.Income.Remove(income);
             _context.SaveChanges();
         }
+
+        public int GetBalance()
+        {
+            var income = _context.Income.Sum(c => c.Amount);
+            var expesnse = _context.Expense.Sum(c => c.Amount);
+
+            return income - expesnse;
+        }
     }
 }

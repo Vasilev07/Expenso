@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -37,15 +37,19 @@ export class ExpenseIncomeComponent implements OnInit {
   public isExpense?: boolean = true;
   public expenseString = 'Expenses';
   public incomeString = 'Incomes';
+  public balance?: number;
   
   constructor(private readonly http: HttpClient,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              public readonly cdr: ChangeDetectorRef) {
   }
 
   public getAllExpenses(): void {
     this.http.get(`https://localhost:44314/api/${this.isExpense ? this.expenseString : this.incomeString}`).subscribe(expenses => {
       this.expenses = expenses as any;
     });
+
+    this.getBalance();
   }
 
   public getAllCategoriesByType(): void {
@@ -56,24 +60,33 @@ export class ExpenseIncomeComponent implements OnInit {
     });
   }
 
+  public getBalance(): void {
+      this.http.get('https://localhost:44314/api/General').subscribe((balance: any) => {
+          console.log('hehehh');
+          this.balance = balance;
+          this.cdr.detectChanges();
+      });
+  }
+
   public ngOnInit(): void {
       this.getAllExpenses();
 
       this.getAllCategoriesByType();
+      this.getBalance();
   }
 
-  public chosenYearHandler(normalizedYear: Moment): void {
-    const ctrlValue = this.date.value;
-    ctrlValue.year(normalizedYear.year());
-    this.date.setValue(ctrlValue);
-  }
+  // public chosenYearHandler(normalizedYear: Moment): void {
+  //   const ctrlValue = this.date.value;
+  //   ctrlValue.year(normalizedYear.year());
+  //   this.date.setValue(ctrlValue);
+  // }
 
-  public chosenMonthHandler(normalizedMonth: Moment, datepicker: MatDatepicker<Moment>): void {
-    const ctrlValue = this.date.value;
-    ctrlValue.month(normalizedMonth.month());
-    this.date.setValue(ctrlValue);
-    datepicker.close();
-  }
+  // public chosenMonthHandler(normalizedMonth: Moment, datepicker: MatDatepicker<Moment>): void {
+  //   const ctrlValue = this.date.value;
+  //   ctrlValue.month(normalizedMonth.month());
+  //   this.date.setValue(ctrlValue);
+  //   datepicker.close();
+  // }
 
   public onAdd(): void {
     const dialogRef = this.dialog.open(ExpenseIncomeDialogComponent, {
@@ -85,12 +98,24 @@ export class ExpenseIncomeComponent implements OnInit {
       console.log(result);
 
       if (result) {
-        console.log(result);
+        const test = {
+          ...result,
+          createdAt: new Date(
+            result.createdAt.year(), 
+            result.createdAt.month(), 
+            result.createdAt.date(), 
+            result.createdAt.hour(), 
+            result.createdAt.minute()
+          )
+        };
         console.log(`https://localhost:44314/api/${this.isExpense ?  this.expenseString : this.incomeString}`);
-        this.http.post(`https://localhost:44314/api/${this.isExpense ?  this.expenseString : this.incomeString}`, result).subscribe(() => {
+        this.http.post(`https://localhost:44314/api/${this.isExpense ?  this.expenseString : this.incomeString}`, test).subscribe(() => {
           this.getAllExpenses();
         });
       }
+
+      this.getBalance();
+      this.cdr.detectChanges();
     });
   }
 
@@ -110,6 +135,9 @@ export class ExpenseIncomeComponent implements OnInit {
           });
         }
       }
+
+      this.getBalance();
+      this.cdr.detectChanges();
     });
   }
 
@@ -125,6 +153,9 @@ export class ExpenseIncomeComponent implements OnInit {
           this.getAllExpenses();
         });
       }
+
+      this.getBalance();
+      this.cdr.detectChanges();
     });
   }
 
@@ -135,6 +166,6 @@ export class ExpenseIncomeComponent implements OnInit {
   }
 
   public getIconName(name: string): string {
-    return icons[name] as any;
+    return icons[name];
   }
 }

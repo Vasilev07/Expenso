@@ -14,10 +14,13 @@
       <mat-slide-toggle [(ngModel)]="!isExpense" (change)="onToggleChange($event)"></mat-slide-toggle>
       Income
     </div>
+    <div>
+      Balance: {{ balance }}
+    </div>
 </div>
 <button mat-button (click)="onAdd()">
     <mat-icon>add</mat-icon>
-    Add
+    Add {{ isExpense ? 'Expense' : 'Income' }}
 </button>
 <div class="expenses" *ngFor="let expense of expenses">
     <mat-card>

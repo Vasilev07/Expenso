@@ -30,5 +30,8 @@ namespace ExpensoAPI.Services
 
         public Income GetIncome(int id);
         public void DeleteIncome(Income income);
+
+        // general
+        public int GetBalance();
     }
 }

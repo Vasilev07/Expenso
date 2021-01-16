@@ -4,4 +4,4 @@ export const icons = {
     smoking: 'smoking_rooms',
     food: 'fast_food',
     car: 'directions_car'
-}
+} as any;

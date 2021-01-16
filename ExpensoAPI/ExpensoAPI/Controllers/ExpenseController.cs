@@ -17,14 +17,13 @@ namespace ExpensoAPI.Controllers
         }
 
         // GET: ExpenseController
+        [HttpGet]
         public ActionResult Index()
         {
             var expenses = expensoRepository.GetAllExpenses();
 
             return Ok(expenses);
         }
-
-       
 
         // POST: ExpenseController/Create
         [HttpPost]
