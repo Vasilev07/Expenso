@@ -13,5 +13,10 @@ namespace ExpensoAPI.Services
         public void AddCategory(Category category);
         public Category GetCategory(int id);
         public IEnumerable<Category> GetAllCategories();
+
+        public void UpdateExpense(Expense expense);
+
+        public Expense GetExpense(int id);
+        public void DeleteExpense(Expense expense);
     }
 }

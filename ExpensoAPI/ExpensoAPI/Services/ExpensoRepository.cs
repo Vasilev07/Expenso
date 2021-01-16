@@ -41,5 +41,22 @@ namespace ExpensoAPI.Services
         {
             return _context.Category;
         }
+
+        public void UpdateExpense(Expense expense)
+        {
+            _context.Update(expense);
+            _context.SaveChanges();
+        }
+
+        public Expense GetExpense(int id)
+        {
+            return _context.Expense.FirstOrDefault((e) => e.Id == id);
+        }
+
+        public void DeleteExpense(Expense expense)
+        {
+            _context.Expense.Remove(expense);
+            _context.SaveChanges();
+        }
     }
 }

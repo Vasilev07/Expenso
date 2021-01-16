@@ -1,9 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ExpensesComponent } from './expenses/expenses/expenses.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -15,15 +13,18 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
-import { DialogComponent } from './core/dialog-component/dialog-component.component';
+import { ExpenseIncomeDialogComponent } from './core/expense-income-dialog/expense-income-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
+import { ExpenseIncomeComponent } from './expense-income/expenses/expense-income.component';
+import { ConfirmationDialogComponent } from './core/confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ExpensesComponent,
-    DialogComponent
+    ExpenseIncomeComponent,
+    ExpenseIncomeDialogComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +47,7 @@ import {MatSelectModule} from '@angular/material/select';
   ],
   exports: [MatFormFieldModule, MatInputModule],
   providers: [],
-  entryComponents: [ DialogComponent ],
+  entryComponents: [ ExpenseIncomeDialogComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

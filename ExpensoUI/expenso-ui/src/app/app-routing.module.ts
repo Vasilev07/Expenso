@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ExpensesComponent } from './expenses/expenses/expenses.component';
+import { ExpenseIncomeComponent } from './expense-income/expenses/expense-income.component';
 
 const routes: Routes = [
   {
     path: 'expenses',
-    component: ExpensesComponent,
+    component: ExpenseIncomeComponent,
   },
   { path: '',
     redirectTo: '/expenses',

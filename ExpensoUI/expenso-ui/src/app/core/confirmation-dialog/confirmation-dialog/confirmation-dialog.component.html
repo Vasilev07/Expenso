@@ -1,0 +1,5 @@
+<div mat-dialog-actions>
+    <div>Are you sure you want to DELETE {{ data.name }}</div>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data.id" cdkFocusInitial>Ok</button>
+</div>
