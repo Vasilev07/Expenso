@@ -48,6 +48,7 @@ export class ExpenseIncomeDialogComponent implements OnInit {
       });
 
       this.formGroup.valueChanges.subscribe((group) => {
+        console.log(group);
         const foundCategory: ICategory = this.data.categories.find((cat: any) => cat.name === group.selected)
         this.selectedData = {
           id: this.data.id,

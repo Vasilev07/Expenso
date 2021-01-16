@@ -5,6 +5,7 @@ import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/mat
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { isEqual } from 'lodash';
 import * as moment from 'moment';
 import { Moment } from 'moment';
@@ -31,13 +32,16 @@ export class ExpenseIncomeComponent implements OnInit {
   public date = new FormControl(moment());
   public expenses: any[] = [];
   public categories: any[] = [];
-
+  public isExpense?: boolean = true;
+  public expenseString = 'Expenses';
+  public incomeString = 'Incomes';
+  
   constructor(private readonly http: HttpClient,
               public dialog: MatDialog) {
   }
 
   public getAllExpenses(): void {
-    this.http.get('https://localhost:44314/api/Expenses').subscribe(expenses => {
+    this.http.get(`https://localhost:44314/api/${this.isExpense ? this.expenseString : this.incomeString}`).subscribe(expenses => {
       this.expenses = expenses as any;
     });
   }
@@ -70,8 +74,12 @@ export class ExpenseIncomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: IExpenseIncomeData) => {
+      console.log(result);
+
       if (result) {
-        this.http.post('https://localhost:44314/api/Expenses', result).subscribe(() => {
+        console.log(result);
+        console.log(`https://localhost:44314/api/${this.isExpense ?  this.expenseString : this.incomeString}`);
+        this.http.post(`https://localhost:44314/api/${this.isExpense ?  this.expenseString : this.incomeString}`, result).subscribe(() => {
           this.getAllExpenses();
         });
       }
@@ -89,7 +97,7 @@ export class ExpenseIncomeComponent implements OnInit {
         const expense = this.expenses.find((exp: IExpenseIncomeData) => exp.id === result.id);
         const hasChange = !isEqual(expense, result);
         if (hasChange) {
-          this.http.put('https://localhost:44314/api/Expenses', result).subscribe(() => {
+          this.http.put(`https://localhost:44314/api/${this.isExpense ?  this.expenseString : this.incomeString}`, result).subscribe(() => {
             this.getAllExpenses();
           });
         }
@@ -105,10 +113,16 @@ export class ExpenseIncomeComponent implements OnInit {
 	
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.http.delete(`https://localhost:44314/api/Expenses/${result}`).subscribe(() => {
+        this.http.delete(`https://localhost:44314/api/${this.isExpense ?  this.expenseString : this.incomeString}/${result}`).subscribe(() => {
           this.getAllExpenses();
         });
       }
     });
+  }
+
+  public onToggleChange(change: MatSlideToggleChange): void {
+    this.isExpense = !change.checked;
+    this.getAllExpenses();
+
   }
 }

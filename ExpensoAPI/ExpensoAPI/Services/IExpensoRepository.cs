@@ -8,15 +8,27 @@ namespace ExpensoAPI.Services
 {
     public interface IExpensoRepository
     {
-        public void AddExpense(Expense expense);
-        public IEnumerable<Expense> GetAllExpenses();
+        // Category
         public void AddCategory(Category category);
         public Category GetCategory(int id);
         public IEnumerable<Category> GetAllCategories();
 
+
+        // Expenses
+        public void AddExpense(Expense expense);
+        public IEnumerable<Expense> GetAllExpenses();
+        
         public void UpdateExpense(Expense expense);
 
         public Expense GetExpense(int id);
         public void DeleteExpense(Expense expense);
+
+        // Incomes
+        public void AddIncomes(Income income);
+        public IEnumerable<Income> GetAllIncomes();
+        public void UpdateIncome(Income income);
+
+        public Income GetIncome(int id);
+        public void DeleteIncome(Income income);
     }
 }

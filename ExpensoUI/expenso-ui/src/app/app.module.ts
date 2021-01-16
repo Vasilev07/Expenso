@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import { ExpenseIncomeComponent } from './expense-income/expenses/expense-income.component';
 import { ConfirmationDialogComponent } from './core/confirmation-dialog/confirmation-dialog/confirmation-dialog.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ConfirmationDialogComponent } from './core/confirmation-dialog/confirma
     HttpClientModule,
     MatButtonModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   exports: [MatFormFieldModule, MatInputModule],
   providers: [],

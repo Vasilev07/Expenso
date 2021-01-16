@@ -9,7 +9,11 @@
                         panelClass="example-month-picker">
         </mat-datepicker>
     </mat-form-field> -->
-    <div>Expenses</div>
+    <div>
+      Expense
+      <mat-slide-toggle [(ngModel)]="!isExpense" (change)="onToggleChange($event)"></mat-slide-toggle>
+      Income
+    </div>
 </div>
 <button mat-button (click)="onAdd()">
     <mat-icon>add</mat-icon>
