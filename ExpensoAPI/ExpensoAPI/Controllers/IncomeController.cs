@@ -19,10 +19,13 @@ namespace ExpensoAPI.Controllers
             expensoRepository = expenseRepository;
         }
 
-        [HttpGet]
-        public ActionResult Index()
+        [HttpGet("{date}")]
+        public ActionResult Index(string date)
         {
-            var expenses = expensoRepository.GetAllIncomes();
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddMilliseconds(double.Parse(date)).ToLocalTime();
+
+            var expenses = expensoRepository.GetAllIncomes(dtDateTime);
 
             return Ok(expenses);
         }

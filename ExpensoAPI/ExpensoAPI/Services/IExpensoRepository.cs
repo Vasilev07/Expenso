@@ -16,7 +16,7 @@ namespace ExpensoAPI.Services
 
         // Expenses
         public void AddExpense(Expense expense);
-        public IEnumerable<Expense> GetAllExpenses();
+        public IEnumerable<Expense> GetAllExpenses(DateTime date);
         
         public void UpdateExpense(Expense expense);
 
@@ -25,7 +25,7 @@ namespace ExpensoAPI.Services
 
         // Incomes
         public void AddIncomes(Income income);
-        public IEnumerable<Income> GetAllIncomes();
+        public IEnumerable<Income> GetAllIncomes(DateTime date);
         public void UpdateIncome(Income income);
 
         public Income GetIncome(int id);

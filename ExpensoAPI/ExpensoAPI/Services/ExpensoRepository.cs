@@ -40,9 +40,11 @@ namespace ExpensoAPI.Services
             _context.SaveChanges();
         }
 
-        public IEnumerable<Expense> GetAllExpenses()
+        public IEnumerable<Expense> GetAllExpenses(DateTime date)
         {
-            return _context.Expense.Include((e) => e.Category);
+            return _context.Expense
+                .Include((e) => e.Category)
+                .Where((e) => e.CreatedAt.Year == date.Year && e.CreatedAt.Month == date.Month);
         }
 
         public void UpdateExpense(Expense expense)
@@ -69,9 +71,10 @@ namespace ExpensoAPI.Services
             _context.SaveChanges();
         }
 
-        public IEnumerable<Income> GetAllIncomes()
+        public IEnumerable<Income> GetAllIncomes(DateTime date)
         {
-            return _context.Income.Include((e) => e.Category);
+            return _context.Income.Include((e) => e.Category)
+                .Where((i) => i.CreatedAt.Year == date.Year && i.CreatedAt.Month == date.Month);
         }
 
         public void UpdateIncome(Income income)

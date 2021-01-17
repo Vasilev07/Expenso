@@ -45,7 +45,8 @@ export class ExpenseIncomeComponent implements OnInit {
   }
 
   public getAllExpenses(): void {
-    this.http.get(`https://localhost:44314/api/${this.isExpense ? this.expenseString : this.incomeString}`).subscribe(expenses => {
+    console.log(`https://localhost:44314/api/${this.isExpense ? this.expenseString : this.incomeString}/${this.date.value}`);
+    this.http.get(`https://localhost:44314/api/${this.isExpense ? this.expenseString : this.incomeString}/${"" + this.date.value}`, this.date.value).subscribe(expenses => {
       this.expenses = expenses as any;
     });
 
@@ -73,6 +74,10 @@ export class ExpenseIncomeComponent implements OnInit {
 
       this.getAllCategoriesByType();
       this.getBalance();
+
+      this.date.valueChanges.subscribe((date) => {
+        this.getAllExpenses();
+      });
   }
 
   // public chosenYearHandler(normalizedYear: Moment): void {
