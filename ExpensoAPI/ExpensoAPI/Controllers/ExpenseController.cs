@@ -53,7 +53,7 @@ namespace ExpensoAPI.Controllers
 
                 if (oldExpense == null || category == null) return NotFound();
 
-                oldExpense.CratedAt = expense.CratedAt;
+                oldExpense.CreatedAt = expense.CreatedAt;
                 oldExpense.CategoryId = expense.CategoryId;
                 oldExpense.Category = category;
                 oldExpense.Amount = expense.Amount;

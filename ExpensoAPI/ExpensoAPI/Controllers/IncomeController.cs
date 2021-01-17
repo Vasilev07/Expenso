@@ -49,7 +49,7 @@ namespace ExpensoAPI.Controllers
 
                 if (oldIncome == null || category == null) return NotFound();
 
-                oldIncome.CratedAt = income.CratedAt;
+                oldIncome.CreatedAt = income.CreatedAt;
                 oldIncome.CategoryId = income.CategoryId;
                 oldIncome.Category = category;
                 oldIncome.Amount = income.Amount;

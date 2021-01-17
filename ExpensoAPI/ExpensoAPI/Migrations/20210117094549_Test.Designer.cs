@@ -4,14 +4,16 @@ using ExpensoAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExpensoAPI.Migrations
 {
     [DbContext(typeof(Expenso))]
-    partial class ExpensoModelSnapshot : ModelSnapshot
+    [Migration("20210117094549_Test")]
+    partial class Test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,7 +28,7 @@ namespace ExpensoAPI.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("CratedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsExpense")
@@ -56,7 +58,7 @@ namespace ExpensoAPI.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<DateTimeOffset>("CreatedAt")
+                    b.Property<DateTimeOffset>("CratedAt")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<DateTimeOffset>("UpdatedAt")
@@ -82,7 +84,7 @@ namespace ExpensoAPI.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("CratedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("UpdatedAt")

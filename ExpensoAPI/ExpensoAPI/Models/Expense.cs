@@ -9,8 +9,8 @@ namespace ExpensoAPI.Models
     {
         public int Id { get; set; }
         public int Amount { get; set; }
-        public DateTime CratedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
+        public DateTimeOffset UpdatedAt { get; set; }
         public Category Category { get; set; }
         public int CategoryId { get; set; }
     }

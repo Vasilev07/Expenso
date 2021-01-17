@@ -39,7 +39,7 @@ namespace ExpensoAPI.Controllers
         {
             try
             {
-                category.CratedAt = DateTime.Now;
+                category.CreatedAt = DateTime.Now;
                 category.UpdatedAt = DateTime.Now;
                 expenseRepository.AddCategory(category);
 
